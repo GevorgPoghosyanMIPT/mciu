@@ -1,0 +1,41 @@
+#include "pico/stdlib.h"
+#include "hardware/gpio.h"
+#include "led.h"
+#include "log.h"
+#include "device.h"
+const uint BUTTON_PIN = 15;
+const uint DEBOUNCE_MS = 20;
+bool get_button_debounce(uint pin){
+static bool candidate = true;
+static bool stable = true;
+static uint64_t changed_at = 0;
+const bool sample = gpio_get(pin);
+const uint64_t now = time_us_64();
+if (sample != candidate) { candidate = sample; changed_at = now; }
+if (now - changed_at >= (uint64_t)DEBOUNCE_MS * 1000u) { stable = candidate; }
+return stable;
+}
+void handle_command(int command){
+if (command == PICO_ERROR_TIMEOUT) return;
+LOG_DBG("got %c\n", command);
+if (command == 101) { led_set(true); }
+else if (command == 100) { led_set(false); }
+else if (command == 118) { log_version(); }
+else if (command == 105) { device_info(); }
+else { LOG_ERR("unknown command: %c\n", command); }
+}
+int main(void){
+stdio_init_all();
+led_init();
+gpio_init(BUTTON_PIN);
+gpio_set_dir(BUTTON_PIN, GPIO_IN);
+gpio_pull_up(BUTTON_PIN);
+bool previous = true;
+while (1) {
+const bool current = get_button_debounce(BUTTON_PIN);
+if (previous && !current) { led_toggle(); }
+previous = current;
+handle_command(getchar_timeout_us(0));
+sleep_ms(1);
+}
+}

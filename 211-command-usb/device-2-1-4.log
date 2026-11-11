@@ -1,0 +1,29 @@
+задание: 2.1.4
+проект: 211-command-usb
+устройство: 2e8a:000a
+серийный номер: E66098F29B472339
+порт: COM8
+начало: 2026-09-24T16:34:30
+   0.000 --> fw_info
+   0.008 <-- fw_info
+   0.008 <-- dbg read_line:88 got fw_info
+   0.008 <-- object          address     value
+   0.009 <-- main            0x10000479  0xb5f8
+   0.009 <-- fw_info         0x10000751  0x4b37
+   0.010 <-- commands        0x10007e74
+   0.010 <-- - enable        0x100002cd
+   0.010 <-- - disable       0x100002c1
+   0.011 <-- - info          0x100002b9
+   0.011 <-- - version       0x100002b1
+   0.012 <-- - ping          0x100002a1
+   0.012 <-- - mem_info      0x10000299
+   0.012 <-- - fw_info       0x10000291
+   0.013 <-- - dev_info      0x10000289
+   0.013 <-- - boot_info     0x10000281
+   0.014 <-- DEVICE_PROJECT  0x10007824  211-command-usb
+   0.014 <-- DEVICE_BOARD    0x1000787c  pico
+   0.015 <-- data_variable   0x20000f58  104
+   0.015 <-- bss_variable    0x20001f24  4
+   0.016 <-- stack_variable  0x20041f9c  1946
+   0.016 <-- heap_variable   0x20002420  1951
+итог: отправлено команд 3, принято строк 63

@@ -23,4 +23,16 @@
    9.242 <-- main_time_exec
    9.242 <-- dbg read_line:124 got main_time_exec
    9.243 <-- iteration avg 5.73 us, max 4699093 us
+  14.248 --> main_time_exec
+  14.249 <-- main_time_exec
+  14.250 <-- dbg read_line:124 got main_time_exec
+  14.250 <-- iteration avg 2.65 us, max 4699093 us
+  15.252 --> main_time_reset
+  15.253 <-- main_time_reset
+  15.253 <-- dbg read_line:124 got main_time_reset
+  15.253 <-- max reset
+  16.337 --> main_time_exec
+  16.338 <-- main_time_exec
+  16.339 <-- dbg read_line:124 got main_time_exec
+  16.339 <-- iteration avg 2.59 us, max 292 us
 итог: отправлено команд 7, принято строк 48

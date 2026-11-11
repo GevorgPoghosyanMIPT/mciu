@@ -11,6 +11,9 @@
 #define LINE_SIZE 32
 const uint BLINK_HALF_PERIOD_MS = 500;
 uint64_t last_toggle_us = 0;
+
+// Прикидка: 4 операции double, 175 + 110 + 190 + 110 = 585 тактов на член.
+// 1 000 000 членов при 125 МГц: 585 000 000 / 125 000 000 = 4,68 с.
 const uint CALC_PI_TERMS = 1000000;
 volatile double pi_result;
 
@@ -19,9 +22,7 @@ uint line_length = 0;
 
 double calc_pi(uint terms) {
     double sum = 0.0; double sign = 1.0;
-    for (uint k = 0; k < terms; k++) {
-        sum += sign / (2.0 * k + 1.0); sign = -sign;
-    }
+    for (uint k = 0; k < terms; k++) { sum += sign / (2.0 * k + 1.0); sign = -sign; }
     return 4.0 * sum;
 }
 
@@ -41,17 +42,10 @@ static void cmd_calc_pi(void) {
     const uint64_t start_us = time_us_64();
     pi_result = calc_pi(CALC_PI_TERMS);
     const uint64_t spent_us = time_us_64() - start_us;
-    printf("pi: %.8f\n", pi_result);
-    printf("time: %llu ms\n", (unsigned long long)(spent_us / 1000u));
+    printf("pi: %.8f\n", pi_result); printf("time: %llu ms\n", (unsigned long long)(spent_us / 1000u));
 }
-
-static void cmd_main_time_exec(void) {
-    printf("iteration avg %.2f us, max %u us\n", (double)profiling_avg_us(), (unsigned)profiling_max_us());
-}
-
-static void cmd_main_time_reset(void) {
-    profiling_reset_max(); printf("max reset\n");
-}
+static void cmd_main_time_exec(void) { printf("iteration avg %.2f us, max %u us\n", (double)profiling_avg_us(), (unsigned)profiling_max_us()); }
+static void cmd_main_time_reset(void) { profiling_reset_max(); printf("max reset\n"); }
 
 const struct command_t commands[] = {
     { "info", cmd_info }, { "version", cmd_version }, { "ping", cmd_ping },
@@ -64,17 +58,12 @@ const uint command_count = sizeof(commands) / sizeof(commands[0]);
 
 void blink(void) {
     const uint64_t now_us = time_us_64();
-    if (now_us - last_toggle_us >= (uint64_t)BLINK_HALF_PERIOD_MS * 1000u) {
-        last_toggle_us = now_us; led_toggle();
-    }
+    if (now_us - last_toggle_us >= (uint64_t)BLINK_HALF_PERIOD_MS * 1000u) { last_toggle_us = now_us; led_toggle(); }
 }
 
 void handle_command(const char *command) {
     for (uint i = 0; i < command_count; i++) {
-        if (strcmp(command, commands[i].name) == 0) {
-            if (commands[i].handler != NULL) { commands[i].handler(); }
-            return;
-        }
+        if (strcmp(command, commands[i].name) == 0) { if (commands[i].handler != NULL) { commands[i].handler(); } return; }
     }
     LOG_ERR("unknown command: %s\n", command);
 }
@@ -87,9 +76,7 @@ void read_line(void) {
         if (line_length > 0) { LOG_DBG("got %s\n", line); handle_command(line); }
         line_length = 0; return;
     }
-    if (line_length + 1 < LINE_SIZE) {
-        line[line_length] = (char)symbol; line_length++; putchar(symbol);
-    }
+    if (line_length + 1 < LINE_SIZE) { line[line_length] = (char)symbol; line_length++; putchar(symbol); }
 }
 
 int main(void) {

@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 #define DEVICE_NAME "es-cmd-usb"
-#define FIRMWARE_VERSION "1.0.0"
+#define FIRMWARE_VERSION "1.0.1"
 #define DEVICE_PROJECT "221-command-time"
 #ifndef DEVICE_REPO
 #define DEVICE_REPO "https://github.com/GevorgPoghosyanMIPT/mciu"

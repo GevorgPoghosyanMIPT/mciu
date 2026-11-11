@@ -1,0 +1,53 @@
+задание: 2.2.5
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: E66098F29B56BD32
+порт: COM12
+начало: 2026-10-22T16:35:12
+   0.000 --> clk_info
+   0.001 <-- clk_info
+   0.001 <-- dbg read_line:124 got clk_info
+   0.002 <-- signal     set_khz measured_khz
+   0.002 <-- clk_ref      12000        12001
+   0.004 <-- clk_sys     125000       125000
+   0.006 <-- clk_usb      48000        48000
+   1.112 --> main_time_reset
+   1.113 <-- main_time_reset
+   1.114 <-- dbg read_line:124 got main_time_reset
+   1.114 <-- max reset
+   3.199 --> main_time_exec
+   3.200 <-- main_time_exec
+   3.200 <-- dbg read_line:124 got main_time_exec
+   3.201 <-- iteration avg 2.57 us, max 285 us
+   4.199 --> calc_pi
+   4.199 <-- calc_pi
+   4.200 <-- dbg read_line:124 got calc_pi
+   8.899 <-- pi: 3.14159165
+   8.899 <-- time: 4698 ms
+  10.311 --> clk_sys_low
+  10.312 <-- clk_sys_low
+  10.312 <-- dbg read_line:124 got clk_sys_low
+  10.313 <-- inf clk_sys_set:45 clk_sys 62500 kHz
+  11.399 --> clk_info
+  11.400 <-- clk_info
+  11.401 <-- signal     set_khz measured_khz
+  11.403 <-- clk_sys      62500        62500
+  12.399 --> uptime
+  12.401 <-- uptime: 152673 ms
+  14.400 --> uptime
+  14.401 <-- uptime: 154673 ms
+  15.605 --> main_time_reset
+  15.608 <-- max reset
+  17.613 --> main_time_exec
+  17.616 <-- iteration avg 5.18 us, max 592 us
+  18.807 --> calc_pi
+  28.206 <-- pi: 3.14159165
+  28.206 <-- time: 9397 ms
+  29.916 --> clk_sys_default
+  29.919 <-- inf clk_sys_set:45 clk_sys 125000 kHz
+  30.922 --> clk_info
+  30.925 <-- clk_sys     125000       125000
+  32.113 --> calc_pi
+  36.813 <-- pi: 3.14159165
+  36.813 <-- time: 4698 ms
+итог: отправлено команд 14, принято строк 103

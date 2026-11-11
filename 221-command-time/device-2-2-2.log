@@ -1,0 +1,27 @@
+задание: 2.2.2
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: E66098F29B56BD32
+порт: COM12
+начало: 2026-10-22T16:36:16
+   0.000 --> uptime
+   0.025 <-- uptime
+   0.051 <-- dbg read_line:124 got uptime
+   0.077 <-- uptime: 238234 ms
+   0.352 <-- inf led_set:21 led on
+   0.429 --> boot_info
+   0.454 <-- boot_info
+   0.481 <-- dbg read_line:124 got boot_info
+   0.506 <-- vector table   0x10000100
+   0.533 <-- stack top    0x20042000
+   0.558 <-- reset        0x100001f7
+   0.585 <-- reset (even) 0x100001f6
+   0.610 <-- gpio in        0xd0000004
+   0.636 <-- led bit      1
+   0.662 <-- gpio_get     1
+   0.852 <-- inf led_set:21 led off
+   0.852 --> uptime
+   0.877 <-- uptime
+   0.903 <-- dbg read_line:124 got uptime
+   0.930 <-- uptime: 239086 ms
+итог: отправлено команд 8, принято строк 55

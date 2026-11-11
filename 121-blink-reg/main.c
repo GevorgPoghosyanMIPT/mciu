@@ -3,6 +3,7 @@
 #include "hardware/structs/sio.h"
 
 int main() {
+    gpio_init(25);
     gpio_set_dir(25, GPIO_OUT);
     while (1) {
         sio_hw->gpio_out_set = 1 << 25;

@@ -31,7 +31,9 @@
   11.399 --> clk_info
   11.400 <-- clk_info
   11.401 <-- signal     set_khz measured_khz
-  11.403 <-- clk_sys      62500        62500
+  11.402 <-- clk_ref      12000        12001
+  11.404 <-- clk_sys      62500        62500
+  11.406 <-- clk_usb      48000        48000
   12.399 --> uptime
   12.401 <-- uptime: 152673 ms
   14.400 --> uptime
@@ -46,7 +48,10 @@
   29.916 --> clk_sys_default
   29.919 <-- inf clk_sys_set:45 clk_sys 125000 kHz
   30.922 --> clk_info
-  30.925 <-- clk_sys     125000       125000
+  30.923 <-- clk_info
+  30.925 <-- clk_ref      12000        12001
+  30.926 <-- clk_sys     125000       125000
+  30.927 <-- clk_usb      48000        48000
   32.113 --> calc_pi
   36.813 <-- pi: 3.14159165
   36.813 <-- time: 4698 ms

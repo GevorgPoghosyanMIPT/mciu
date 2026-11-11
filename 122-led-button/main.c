@@ -1,23 +1,26 @@
-#include "pico/stdlib.h" 
-#include "hardware/gpio.h" 
- 
-int main() { 
-    gpio_init(25); 
-    gpio_set_dir(25, GPIO_OUT); 
-    gpio_init(15); 
-    gpio_set_dir(15, GPIO_IN); 
-    gpio_pull_up(15); 
- 
-    bool led_state = false; 
-    bool last_button_state = true; 
- 
-    while (1) { 
-        bool current_button_state = gpio_get(15); 
-        if (current_button_state == 0 && last_button_state == 1) { 
-            led_state = !led_state; 
-            gpio_put(25, led_state); 
-        } 
-        last_button_state = current_button_state; 
-        sleep_ms(1); 
-    } 
-} 
+#include "pico/stdlib.h"
+#include "hardware/gpio.h"
+
+const uint LED_PIN = 25;
+const uint BUTTON_PIN = 15;
+
+int main(void)
+{
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_put(LED_PIN, false);
+    gpio_init(BUTTON_PIN);
+    gpio_set_dir(BUTTON_PIN, GPIO_IN);
+    gpio_pull_up(BUTTON_PIN);
+    bool led = false;
+    bool previous = true;
+    while (1) {
+        const bool current = gpio_get(BUTTON_PIN);
+        if (previous && !current) {
+            led = !led;
+            gpio_put(LED_PIN, led);
+        }
+        previous = current;
+        tight_loop_contents();
+    }
+}

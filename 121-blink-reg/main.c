@@ -1,14 +1,20 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
-#include "hardware/structs/sio.h"
+#include "hardware/regs/addressmap.h"
+#include "hardware/regs/sio.h"
 
-int main() {
-    gpio_init(25);
-    gpio_set_dir(25, GPIO_OUT);
+const uint LED_PIN = 25;
+
+int main(void)
+{
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    volatile uint32_t *out_set = (volatile uint32_t *)(SIO_BASE + SIO_GPIO_OUT_SET_OFFSET);
+    volatile uint32_t *out_clr = (volatile uint32_t *)(SIO_BASE + SIO_GPIO_OUT_CLR_OFFSET);
     while (1) {
-        sio_hw->gpio_out_set = 1 << 25;
+        *out_set = 1u << LED_PIN;
         sleep_ms(250);
-        sio_hw->gpio_out_clr = 1 << 25;
-        sleep_ms(250);
+        *out_clr = 1u << LED_PIN;
+        sleep_ms(1000);
     }
 }
